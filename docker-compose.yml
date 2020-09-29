@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db-tada:
+    image: 'postgres:latest'
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - './db_1:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_ROOT_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    expose:
+      - '${DB_PORT}'
+
+  db-monitor-tada:
+    image: 'dpage/pgadmin4'
+    depends_on:
+      - db-tada
+    ports:
+      - '${DB_MONITOR_PORT}:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${DB_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${DB_ROOT_PASSWORD}
