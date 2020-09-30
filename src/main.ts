@@ -15,7 +15,7 @@ import { AuthenticationGuard } from './common/guards/authentication.guard';
 import { FormatResponseInterceptor } from './common/interceptors/response.interceptor';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.use(helmet());
 
